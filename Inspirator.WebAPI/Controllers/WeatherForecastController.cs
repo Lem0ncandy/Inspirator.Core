@@ -24,6 +24,7 @@ namespace Inspirator.WebAPI.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
+            _logger.LogDebug(1, "NLog injected into HomeController");
         }
         /// <summary>
         /// Get
@@ -32,6 +33,7 @@ namespace Inspirator.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogInformation("Hello, this is the index!");
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
