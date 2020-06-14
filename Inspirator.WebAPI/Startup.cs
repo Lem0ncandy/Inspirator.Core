@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +27,14 @@ namespace Inspirator.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSwaggerGen(setup =>
+            {
+                setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Inspirator API", Version = "V1" });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                setup.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +44,13 @@ namespace Inspirator.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(setup =>
+            {
+                setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Inspirator API V1");
+            });
 
             app.UseRouting();
 

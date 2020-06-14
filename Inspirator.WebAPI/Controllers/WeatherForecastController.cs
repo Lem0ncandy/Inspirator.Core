@@ -7,6 +7,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Inspirator.WebAPI.Controllers
 {
+    /// <summary>
+    /// Weather Forecast Controller
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -22,7 +25,10 @@ namespace Inspirator.WebAPI.Controllers
         {
             _logger = logger;
         }
-
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <returns>IEnumerable</returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

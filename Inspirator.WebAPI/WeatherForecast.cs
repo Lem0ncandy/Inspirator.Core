@@ -2,6 +2,9 @@ using System;
 
 namespace Inspirator.WebAPI
 {
+    /// <summary>
+    /// WeatherForecast data
+    /// </summary>
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
