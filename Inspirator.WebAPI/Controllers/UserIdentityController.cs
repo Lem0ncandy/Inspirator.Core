@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Reflection.Metadata;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace Inspirator.WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserIdentityController : ControllerBase
+    {
+        private readonly IConfiguration _configuration;
+
+        public UserIdentityController(IConfiguration configuration)
+        {
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        }
+
+        // GET: api/<UserIdentityController>
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET api/<UserIdentityController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST api/<UserIdentityController>
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+        // PUT api/<UserIdentityController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/<UserIdentityController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
+
+        public string IssueJWTToken(IEnumerable<Claim> Claims)
+        {
+            string issuer = _configuration["Audience:Issuer"];
+            string audience = _configuration["Audience:Audience"];
+            string secret = _configuration["Audience:Secret"];
+            //List<Claim> claims = new List<Claim>()
+            //    {
+            //        new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+            //        new Claim(ClaimTypes.Email,user.Email??""),
+            //        new Claim(ClaimTypes.GivenName,user.Nickname??""),
+            //        new Claim(ClaimTypes.Name,user.Username??""),
+            //    };
+            var handler = new JwtSecurityTokenHandler();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(issuer, audience, Claims, expires: DateTime.Now.AddHours(1), signingCredentials: credentials);
+            return handler.WriteToken(token);
+        }
+    }
+}
