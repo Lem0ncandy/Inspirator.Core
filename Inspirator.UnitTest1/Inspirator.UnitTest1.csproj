@@ -7,10 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Inspirator.Common\Inspirator.Common.csproj" />
+    <ProjectReference Include="..\Inspirator.IRepository\Inspirator.IRepository.csproj" />
+    <ProjectReference Include="..\Inspirator.IService\Inspirator.IService.csproj" />
+    <ProjectReference Include="..\Inspirator.Model\Inspirator.Model.csproj" />
+    <ProjectReference Include="..\Inspirator.Repository\Inspirator.Repository.csproj" />
+    <ProjectReference Include="..\Inspirator.Service\Inspirator.Service.csproj" />
+    <ProjectReference Include="..\Inspirator.WebAPI\Inspirator.WebAPI.csproj" />
   </ItemGroup>
 
 </Project>

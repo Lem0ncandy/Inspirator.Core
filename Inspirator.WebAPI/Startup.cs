@@ -1,19 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Autofac;
 using Inspirator.Model.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Inspirator.WebAPI
 {
@@ -29,8 +24,12 @@ namespace Inspirator.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MainContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("MainContext")));
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<MainContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("MainContext"));
+                    
+                },ServiceLifetime.Scoped);
 
             services.AddControllers();
             services.AddMvc();
