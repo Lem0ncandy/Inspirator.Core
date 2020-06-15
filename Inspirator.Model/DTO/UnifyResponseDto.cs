@@ -9,9 +9,9 @@ namespace Inspirator.Model.DTO
     public class UnifyResponseDto
     {
         public StatusCode Code { get; set; }
-        public string Message { get; set; }
+        public object Message { get; set; }
 
-        public UnifyResponseDto(StatusCode code, string message)
+        public UnifyResponseDto(StatusCode code, object message)
         {
             Code = code;
             Message = message ?? throw new ArgumentNullException(nameof(message));

@@ -1,18 +1,18 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using Autofac;
-using Inspirator.IRepository;
-using Inspirator.IService;
-using Inspirator.Repository;
-using Inspirator.Service;
+using Inspirator.Model.DTO;
 using Inspirator.WebAPI.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
+
 
 namespace Inspirator.WebAPI
 {
@@ -30,7 +30,31 @@ namespace Inspirator.WebAPI
         {
             services.AddDBContext(Configuration);
 
-            services.AddControllers();
+            services.AddControllers(setup =>
+                {
+                    setup.ReturnHttpNotAcceptable = true;
+                })
+                .AddNewtonsoftJson(setup =>
+                {
+                    setup.SerializerSettings.ContractResolver =
+                        new CamelCasePropertyNamesContractResolver();
+                })
+                .AddXmlDataContractSerializerFormatters()
+                .ConfigureApiBehaviorOptions(setup =>
+                {
+                    setup.InvalidModelStateResponseFactory = context =>
+                    {
+                        var problemDetails = new ValidationProblemDetails(context.ModelState);
+                        problemDetails.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+
+                        var resultDto = new UnifyResponseDto(Model.DTO.Enum.StatusCode.ParameterErroe, problemDetails.Errors);
+
+                        return new UnprocessableEntityObjectResult(resultDto)
+                        {
+                            ContentTypes = { "application/problem+json" }
+                        };
+                    };
+                });
 
             services.AddMvc();
 
@@ -41,8 +65,6 @@ namespace Inspirator.WebAPI
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 setup.IncludeXmlComments(xmlPath);
             });
-            //services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IUserRepository, UserRepository>();
 
         }
 
