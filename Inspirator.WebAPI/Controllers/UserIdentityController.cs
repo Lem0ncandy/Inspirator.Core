@@ -55,7 +55,7 @@ namespace Inspirator.WebAPI.Controllers
         {
         }
 
-        public string IssueJWTToken(IEnumerable<Claim> Claims)
+        private string IssueJWTToken(IEnumerable<Claim> Claims)
         {
             string issuer = _configuration["Audience:Issuer"];
             string audience = _configuration["Audience:Audience"];

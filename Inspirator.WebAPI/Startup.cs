@@ -40,7 +40,13 @@ namespace Inspirator.WebAPI
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            
+            var dataAccess = Assembly.GetExecutingAssembly();
+            string serverPath = Path.Combine(AppContext.BaseDirectory, "Inspirator.Services.dll");
+            string repositoryPath = Path.Combine(AppContext.BaseDirectory, "Inspirator.Services.dll");
+            var assemblyServices = Assembly.LoadFrom(serverPath);
+            var assemblyRepositorys = Assembly.LoadFrom(repositoryPath);
+            builder.RegisterAssemblyTypes(assemblyServices).AsImplementedInterfaces().InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(assemblyRepositorys).AsImplementedInterfaces().InstancePerLifetimeScope();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
