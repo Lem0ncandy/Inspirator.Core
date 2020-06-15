@@ -22,7 +22,7 @@ namespace Inspirator.Service
 
         public async Task<User> GetAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _repository.FindAsync(id);
         }
 
         public async Task<List<User>> GetAsync()

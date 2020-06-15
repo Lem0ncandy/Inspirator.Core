@@ -1,7 +1,12 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Autofac;
+using Inspirator.IRepository;
+using Inspirator.IService;
+using Inspirator.Repository;
+using Inspirator.Service;
 using Inspirator.WebAPI.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,17 +41,24 @@ namespace Inspirator.WebAPI
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 setup.IncludeXmlComments(xmlPath);
             });
+            //services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IUserRepository, UserRepository>();
+
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var dataAccess = Assembly.GetExecutingAssembly();
-            string serverPath = Path.Combine(AppContext.BaseDirectory, "Inspirator.Services.dll");
-            string repositoryPath = Path.Combine(AppContext.BaseDirectory, "Inspirator.Services.dll");
-            var assemblyServices = Assembly.LoadFrom(serverPath);
-            var assemblyRepositorys = Assembly.LoadFrom(repositoryPath);
-            builder.RegisterAssemblyTypes(assemblyServices).AsImplementedInterfaces().InstancePerLifetimeScope();
-            builder.RegisterAssemblyTypes(assemblyRepositorys).AsImplementedInterfaces().InstancePerLifetimeScope();
+            Assembly assemblysRepository = Assembly.Load("Inspirator.Repository");
+            Assembly assemblysService = Assembly.Load("Inspirator.Service");
+
+            builder.RegisterAssemblyTypes(assemblysRepository)
+                //.Where(t => t.Name.EndsWith("Repository"))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+            builder.RegisterAssemblyTypes(assemblysService)
+                //.Where(t => t.Name.EndsWith("Service"))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

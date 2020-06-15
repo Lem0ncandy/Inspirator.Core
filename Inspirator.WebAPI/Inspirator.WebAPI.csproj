@@ -25,8 +25,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Inspirator.Common\Inspirator.Common.csproj" />
+	  <ProjectReference Include="..\Inspirator.IRepository\Inspirator.IRepository.csproj" />
 	  <ProjectReference Include="..\Inspirator.IService\Inspirator.IService.csproj" />
 	  <ProjectReference Include="..\Inspirator.Model\Inspirator.Model.csproj" />
+	  <ProjectReference Include="..\Inspirator.Repository\Inspirator.Repository.csproj" />
+	  <ProjectReference Include="..\Inspirator.Service\Inspirator.Service.csproj" />
 	</ItemGroup>
 
 
