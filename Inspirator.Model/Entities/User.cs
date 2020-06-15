@@ -11,7 +11,6 @@ namespace Inspirator.Model.Entities
         public string Email { get; set; }
         public string Nickname { get; set; }
         public string Avatar { get; set; }
-        public Guid UserIdentityId { get; set; }
         public virtual ICollection<UserIdentity> UserIdentitys { get; set; }
     }
 }
