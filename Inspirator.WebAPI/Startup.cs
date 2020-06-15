@@ -78,6 +78,14 @@ namespace Inspirator.WebAPI
 
             app.UseRouting();
 
+            app.UseCors(options =>
+            {
+                options.WithOrigins(Configuration.GetSection("WithOrigins").Get<string[]>());
+                options.AllowAnyHeader().AllowAnyMethod();
+            });
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
