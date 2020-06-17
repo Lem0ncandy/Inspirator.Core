@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Inspirator.IRepository;
 using Inspirator.IService;
+using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;
 using Inspirator.Model.Entities.Enum;
 using Microsoft.EntityFrameworkCore;
@@ -38,14 +39,15 @@ namespace Inspirator.Service
             return await _repository.Find(x => x.IsRemove == false).ToListAsync();
         }
 
-        public async Task<bool> CreateUserAsync(User user, string password)
+        public async Task<bool> CreateUserAsync(SignupDTO model)
         {
+            User user = _mapper.Map<SignupDTO, User>(model);
             bool result = false;
-            if (user != null)
+            if (model != null)
             {
                 await _repository.InsertAsync(user);
-                await _identitySvc.CreateUserIdentityAsync(IdentityType.Password, user.Id, password);
-                result = await _unitOfWork.SaveAsync();
+                await _identitySvc.CreateUserIdentityAsync(IdentityType.Password, user.Id, model.Password);
+                result = await _unitOfWork.CommitAsync();
             }
             return result;
         }

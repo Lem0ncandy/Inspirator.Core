@@ -21,7 +21,7 @@ namespace Inspirator.Model.DTO
         {
         }
 
-        public static UnifyResponseDto Sucess(string message = "操作成功")
+        public static UnifyResponseDto Sucess(string message = "sucess")
         {
             return new UnifyResponseDto
             {
@@ -29,7 +29,7 @@ namespace Inspirator.Model.DTO
                 Message = message
             };
         }
-        public static UnifyResponseDto Sucess(StatusCode code = StatusCode.UnkowError,string message = "操作失败")
+        public static UnifyResponseDto Fail(StatusCode code = StatusCode.UnkowError,string message = "fail")
         {
             return new UnifyResponseDto
             {

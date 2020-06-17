@@ -43,9 +43,16 @@ namespace Inspirator.WebAPI.Controllers
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post(SignupDTO model)
+        public async Task<UnifyResponseDto> Post(SignupDTO model)
         {
-            //_service.CreateUserAsync
+            if (!string.IsNullOrWhiteSpace(model.Password))
+            {
+                if (await _service.CreateUserAsync(model))
+                {
+                    return UnifyResponseDto.Sucess();
+                }
+            }
+            return UnifyResponseDto.Fail();
         }
 
         // PUT api/<UserController>/5

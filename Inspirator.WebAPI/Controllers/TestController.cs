@@ -24,16 +24,6 @@ namespace Inspirator.WebAPI.Controllers
         [HttpGet]
         public async Task Get()
         {
-            await _userService.CreateUserAsync(new Model.Entities.User
-            {
-                Email = "123123123@qq.com",
-                Nickname = "123123213",
-            },"123125sadsas");
-            //_userService.CreateUserAsync(new Model.Entities.User
-            //{
-            //    Email = "aesrfsfdq.com",
-            //    Nickname = "sadfds]]",
-            //}, "[][];;o258");
         }
 
         // GET api/<TestController>/5

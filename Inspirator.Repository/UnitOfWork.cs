@@ -17,15 +17,14 @@ namespace Inspirator.Repository
             _mainContext = mainContext ?? throw new ArgumentNullException(nameof(mainContext));
         }
 
-        public bool Save()
+        public bool Commit()
         {
             return _mainContext.SaveChanges() > 0;
         }
 
-        public async Task<bool> SaveAsync()
+        public async Task<bool> CommitAsync()
         {
             return await _mainContext.SaveChangesAsync() > 0;
-
         }
     }
 }

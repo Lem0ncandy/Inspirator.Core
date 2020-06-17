@@ -9,12 +9,16 @@ namespace Inspirator.Model.DTO
 {
     public class SignupDTO : IValidatableObject
     {
-        [StringLength(12,MinimumLength = 6,ErrorMessage ="昵称长度必须在6~12之间")]
+        [StringLength(12,MinimumLength = 6,ErrorMessage ="用户名长度必须在4~12之间")]
         public string Username { get; set; }
         [Required(ErrorMessage ="密码不可为空")]
         public string Password { get; set; }
         [Required(ErrorMessage ="邮件不为空")]
         public string Email { get; set; }
+        [StringLength(maximumLength:10, ErrorMessage= "昵称长度必须在10个以内之间")]
+        public string NickName { get; set; }
+        [StringLength(maximumLength: 20, ErrorMessage = "号码太长了")]
+        public string PhoneNumber { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

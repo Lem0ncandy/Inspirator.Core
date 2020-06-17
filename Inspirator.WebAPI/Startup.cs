@@ -67,7 +67,7 @@ namespace Inspirator.WebAPI
                 setup.IncludeXmlComments(xmlPath);
             });
 
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

@@ -23,14 +23,13 @@ namespace Inspirator.Service
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<bool> CreateUserIdentityAsync(IdentityType type, Guid userId, string credential)
+        public async Task CreateUserIdentityAsync(IdentityType type, Guid userId, string credential)
         {
             if (type == IdentityType.Password)
             {
                 credential = EncryptUtil.Encrypt(credential);
             }
             await _repository.InsertAsync(new UserIdentity(type, credential, userId));
-            return  _unitOfWork.Save();
         }
 
         public async Task<UserIdentity> GetFirstUserIdentityByUserId(Guid userId, IdentityType type)

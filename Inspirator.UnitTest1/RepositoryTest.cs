@@ -28,10 +28,10 @@ namespace Inspirator.UnitTest1
         [TestMethod]
         public async Task StudentRepositoryTest()
         {
-            var context = new MainContext(CreateDbContextOptions(constr));
-            var u = new UserService(new UserRepository(context));
-            int t = await u.Insert();
-            Assert.AreEqual(t, 1);
+            //var context = new MainContext(CreateDbContextOptions(constr));
+            //var u = new UserService(new UserRepository(context));
+            //int t = await u.Insert();
+            //Assert.AreEqual(t, 1);
         }
         [TestMethod]
         public void Test()

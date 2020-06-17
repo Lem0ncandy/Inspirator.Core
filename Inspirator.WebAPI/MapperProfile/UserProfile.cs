@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
-
+using Inspirator.Model.DTO;
+using Inspirator.Model.Entities;
 
 namespace Inspirator.WebAPI.MapperProfile
 {
-    public class UserProfile
+    public class UserProfile : Profile
     {
-        //Creatmap<>();
+        public UserProfile()
+        {
+            CreateMap<SignupDTO,User>();
+        }
     }
 }

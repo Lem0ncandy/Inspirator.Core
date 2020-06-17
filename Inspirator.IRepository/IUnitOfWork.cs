@@ -7,7 +7,7 @@ namespace Inspirator.IRepository
 {
     public interface IUnitOfWork
     {
-        Task<bool> SaveAsync();
-        bool Save();
+        Task<bool> CommitAsync();
+        bool Commit();
     }
 }
