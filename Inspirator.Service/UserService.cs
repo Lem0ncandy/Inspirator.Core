@@ -22,12 +22,12 @@ namespace Inspirator.Service
 
         public async Task<User> GetAsync(Guid id)
         {
-            return await _repository.FindAsync(id);
+            return await _repository.FindAsync(x => x.Id == id && x.IsRemove == false).SingleAsync();
         }
 
         public async Task<List<User>> GetAsync()
         {
-           return await _repository.FindAsync(x => x.IsRemove != false).ToListAsync();
+           return await _repository.FindAsync(x => x.IsRemove == false).ToListAsync();
         }
 
         public async Task<int> Insert(User user)

@@ -24,9 +24,9 @@ namespace Inspirator.WebAPI.Controllers
 
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<User>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _service.GetAsync();
         }
 
         // GET api/<UserController>/5

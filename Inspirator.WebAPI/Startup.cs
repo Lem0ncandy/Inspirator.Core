@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using Autofac;
+using AutoMapper;
 using Inspirator.Model.DTO;
 using Inspirator.WebAPI.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -66,6 +67,7 @@ namespace Inspirator.WebAPI
                 setup.IncludeXmlComments(xmlPath);
             });
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
