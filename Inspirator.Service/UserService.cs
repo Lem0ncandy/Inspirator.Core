@@ -17,13 +17,15 @@ namespace Inspirator.Service
     {
         private readonly IUserRepository _repository;
         private readonly IUserIdentityService _identitySvc;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UserService(IUserRepository repository, IUserIdentityService identitySvc, IMapper mapper)
+        public UserService(IUserRepository repository, IUserIdentityService identitySvc, IMapper mapper, IUnitOfWork unitOfWork)
         {
             this._repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _identitySvc = identitySvc ?? throw new ArgumentNullException(nameof(identitySvc));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<User> GetUserAsync(Guid id)
@@ -36,25 +38,16 @@ namespace Inspirator.Service
             return await _repository.Find(x => x.IsRemove == false).ToListAsync();
         }
 
-        public async Task<bool> CreateUserAsync(User user,string password)
+        public async Task<bool> CreateUserAsync(User user, string password)
         {
             bool result = false;
             if (user != null)
             {
-                result = (await _repository.InsertAsync(user)) > 0;
-                if (result)
-                {
-                    result = await _identitySvc.CreateUserIdentityAsync(IdentityType.Password, user.Id, password);
-                }
+                await _repository.InsertAsync(user);
+                await _identitySvc.CreateUserIdentityAsync(IdentityType.Password, user.Id, password);
+                result = await _unitOfWork.SaveAsync();
             }
             return result;
-        }
-        public async Task<int> Insert()
-        {
-            return await _repository.InsertAsync(new User
-            {
-                Username = "123",
-            });
         }
     }
 }

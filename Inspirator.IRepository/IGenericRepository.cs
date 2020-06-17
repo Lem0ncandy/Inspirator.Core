@@ -13,10 +13,10 @@ namespace Inspirator.IRepository
         Task<TEntity> FindAsync(Guid Id);
         Task<TEntity> FindAsync(TEntity Entity);
         IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> expression);
-        Task<int> InsertAsync(TEntity entity);
-        Task<int> InsertAsync(List<TEntity> entities);
-        Task<int> UpdateAsync(TEntity entity);
-        Task<int> RemoveAsync(TEntity entity);
-        Task<int> DeleteAsync(TEntity entity);
+        Task InsertAsync(TEntity entity);
+        Task InsertAsync(List<TEntity> entities);
+        Task UpdateAsync(TEntity entity);
+        Task RemoveAsync(TEntity entity);
+        Task DeleteAsync(TEntity entity);
     }
 }

@@ -20,22 +20,19 @@ namespace Inspirator.Repository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<int> RemoveAsync(TEntity entity)
+        public async Task RemoveAsync(TEntity entity)
         {
             entity = (await FindAsync(entity.Id)) ?? throw new NullReferenceException();
             entity.IsRemove = true;
-            return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> InsertAsync(TEntity entity)
+        public async Task InsertAsync(TEntity entity)
         {
-            _context.Set<TEntity>().Add(entity);
-            return await _context.SaveChangesAsync();
+            await _context.Set<TEntity>().AddAsync(entity);
         }
-        public async Task<int> InsertAsync(List<TEntity> entities)
+        public async Task InsertAsync(List<TEntity> entities)
         {
             await _context.Set<TEntity>().AddRangeAsync(entities);
-            return await _context.SaveChangesAsync();
         }
 
         public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
@@ -53,14 +50,13 @@ namespace Inspirator.Repository
             return await _context.Set<TEntity>().Where(x => x.Id == Id && x.IsRemove == false).SingleOrDefaultAsync();
         }
 
-        public async Task<int> UpdateAsync(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             entity = await this.FindAsync(entity) ?? throw new NullReferenceException();
             _context.Entry(entity).State = EntityState.Modified;
-            return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> DeleteAsync(TEntity entity)
+        public async Task DeleteAsync(TEntity entity)
         {
             throw new NotImplementedException();
         }

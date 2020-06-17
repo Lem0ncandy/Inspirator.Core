@@ -14,11 +14,13 @@ namespace Inspirator.Service
     {
         private readonly IUserIdentityRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserIdentityService(IUserIdentityRepository repository, IMapper mapper)
+        public UserIdentityService(IUserIdentityRepository repository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public async Task<bool> CreateUserIdentityAsync(IdentityType type, Guid userId, string credential)
@@ -27,17 +29,18 @@ namespace Inspirator.Service
             {
                 credential = EncryptUtil.Encrypt(credential);
             }
-           return await (_repository.InsertAsync(new UserIdentity(type, credential, userId))) > 0;
+            await _repository.InsertAsync(new UserIdentity(type, credential, userId));
+            return  _unitOfWork.Save();
         }
 
-        public async Task<UserIdentity> GetFirstUserIdentityByUserId(Guid userId,IdentityType type)
+        public async Task<UserIdentity> GetFirstUserIdentityByUserId(Guid userId, IdentityType type)
         {
             return await _repository.Find(x => x.UserId == userId && x.IdentityType == type).SingleOrDefaultAsync();
         }
 
         public async Task<bool> VerifyPasswordAsync(Guid userId, string password)
         {
-            var identity = await this.GetFirstUserIdentityByUserId(userId,IdentityType.Password);
+            var identity = await this.GetFirstUserIdentityByUserId(userId, IdentityType.Password);
             if (identity != null)
             {
                 return EncryptUtil.Verify(identity.Credential, password);
