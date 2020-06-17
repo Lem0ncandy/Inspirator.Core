@@ -49,7 +49,7 @@ namespace Inspirator.WebAPI.Controllers
             {
                 if (await _service.CreateUserAsync(model))
                 {
-                    return UnifyResponseDto.Sucess();
+                    return UnifyResponseDto.Sucess("注册成功");
                 }
             }
             return UnifyResponseDto.Fail();

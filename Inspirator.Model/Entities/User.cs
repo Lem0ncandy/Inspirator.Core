@@ -10,7 +10,7 @@ namespace Inspirator.Model.Entities
         /// <summary>
         /// 用户名
         /// </summary>
-        [StringLength(12, MinimumLength = 6)]
+        [StringLength(12, MinimumLength = 4)]
         [Required]
         public string Username { get; set; }
         /// <summary>

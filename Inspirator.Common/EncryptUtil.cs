@@ -25,9 +25,9 @@ namespace Inspirator.Common
             return hash.ToUpper();
         }
 
-        public static bool Verify(string source, string cipher)
+        public static bool Verify(string cipher, string password)
         {
-            return cipher == Encrypt(source);
+            return cipher == Encrypt(password);
         }
     }
 }

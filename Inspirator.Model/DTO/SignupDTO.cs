@@ -9,8 +9,9 @@ namespace Inspirator.Model.DTO
 {
     public class SignupDTO : IValidatableObject
     {
-        [StringLength(12,MinimumLength = 6,ErrorMessage ="用户名长度必须在4~12之间")]
+        [StringLength(12,MinimumLength = 4,ErrorMessage ="用户名长度必须在4~12之间")]
         public string Username { get; set; }
+        [StringLength(18, MinimumLength = 6, ErrorMessage = "密码长度必须在6~18之间")]
         [Required(ErrorMessage ="密码不可为空")]
         public string Password { get; set; }
         [Required(ErrorMessage ="邮件不为空")]

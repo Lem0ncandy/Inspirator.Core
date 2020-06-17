@@ -33,10 +33,19 @@ namespace Inspirator.Service
         {
             return await _repository.Find(x => x.Id == id && x.IsRemove == false).SingleAsync();
         }
+        public async Task<User> GetUserAsync(string username)
+        {
+            return await _repository.Find(x => x.Username == username).SingleOrDefaultAsync();
+        }
 
         public async Task<List<User>> GetUserAsync()
         {
             return await _repository.Find(x => x.IsRemove == false).ToListAsync();
+        }
+
+        public async Task<Guid> GetUserIdAsync(string username)
+        {
+            return await _repository.Find(x => x.Username == username).Select(x => x.Id).SingleOrDefaultAsync();
         }
 
         public async Task<bool> CreateUserAsync(SignupDTO model)
@@ -51,5 +60,7 @@ namespace Inspirator.Service
             }
             return result;
         }
+
+
     }
 }

@@ -4,6 +4,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Reflection.Metadata;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
+using Inspirator.IService;
+using Inspirator.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -17,10 +20,14 @@ namespace Inspirator.WebAPI.Controllers
     public class UserIdentityController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly IUserIdentityService _service;
+        private readonly IUserService _userSvc;
 
-        public UserIdentityController(IConfiguration configuration)
+        public UserIdentityController(IConfiguration configuration, IUserIdentityService service, IUserService userSvc)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
         }
 
         // GET: api/<UserIdentityController>
@@ -39,8 +46,15 @@ namespace Inspirator.WebAPI.Controllers
 
         // POST api/<UserIdentityController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<UnifyResponseDto> Post(LoginDTO model)
         {
+            Guid userId = await _userSvc.GetUserIdAsync(model.username);
+            if (await _service.VerifyPasswordAsync(userId, model.password))
+            {
+                return UnifyResponseDto.Sucess("登录成功");
+            }
+            return UnifyResponseDto.Fail(Model.DTO.Enum.StatusCode.AuthenticationFailed, "登录失败");
+
         }
 
         // PUT api/<UserIdentityController>/5
