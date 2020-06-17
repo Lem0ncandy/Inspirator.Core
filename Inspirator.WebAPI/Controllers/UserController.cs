@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Inspirator.IService;
+using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +17,12 @@ namespace Inspirator.WebAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserService service)
+        public UserController(IUserService service, IMapper mapper)
         {
             _service = service ?? throw new ArgumentNullException();
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
 
@@ -26,7 +30,7 @@ namespace Inspirator.WebAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<User>> Get()
         {
-            return await _service.GetAsync();
+            return await _service.GetUserAsync();
         }
 
         // GET api/<UserController>/5
@@ -34,13 +38,14 @@ namespace Inspirator.WebAPI.Controllers
         public async Task<User> Get(string id)
         {
             Guid.TryParse(id, out Guid userId);
-            return await _service.GetAsync(userId);
+            return await _service.GetUserAsync(userId);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(SignupDTO model)
         {
+            //_service.CreateUserAsync
         }
 
         // PUT api/<UserController>/5

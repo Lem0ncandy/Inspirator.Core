@@ -28,5 +28,20 @@ namespace Inspirator.Model.Entities
         public Guid UserId { get; set; }
 
         public User User { get; set; }
+
+        public UserIdentity(IdentityType identityType, string credential, Guid userId)
+        {
+            IdentityType = identityType;
+            Credential = credential;
+            UserId = userId;
+        }
+
+        public UserIdentity(IdentityType identityType, string identifier, string credential, Guid userId)
+        {
+            IdentityType = identityType;
+            Identifier = identifier;
+            Credential = credential;
+            UserId = userId;
+        }
     }
 }

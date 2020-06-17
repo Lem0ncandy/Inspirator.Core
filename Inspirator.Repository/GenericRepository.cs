@@ -38,9 +38,9 @@ namespace Inspirator.Repository
             return await _context.SaveChangesAsync();
         }
 
-        public IQueryable<TEntity> FindAsync(Expression<Func<TEntity, bool>> expression)
+        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
         {
-            return _context.Set<TEntity>().Where(expression);
+            return _context.Set<TEntity>().Where(x => x.IsRemove == false).Where(expression);
         }
 
         public async Task<TEntity> FindAsync(TEntity Entity)
@@ -50,7 +50,7 @@ namespace Inspirator.Repository
 
         public async Task<TEntity> FindAsync(Guid Id)
         {
-            return await _context.Set<TEntity>().Where(x => x.Id == Id).SingleOrDefaultAsync();
+            return await _context.Set<TEntity>().Where(x => x.Id == Id && x.IsRemove == false).SingleOrDefaultAsync();
         }
 
         public async Task<int> UpdateAsync(TEntity entity)

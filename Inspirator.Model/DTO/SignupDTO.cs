@@ -1,0 +1,39 @@
+﻿using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
+using System.Text;
+
+namespace Inspirator.Model.DTO
+{
+    public class SignupDTO : IValidatableObject
+    {
+        [StringLength(12,MinimumLength = 6,ErrorMessage ="昵称长度必须在6~12之间")]
+        public string Username { get; set; }
+        [Required(ErrorMessage ="密码不可为空")]
+        public string Password { get; set; }
+        [Required(ErrorMessage ="邮件不为空")]
+        public string Email { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (string.IsNullOrEmpty(Email))
+            {
+                string address = null;
+                try
+                {
+                    address = new MailAddress(Email).Address;
+                }
+                catch
+                {
+
+                }
+                if (string.IsNullOrEmpty(address))
+                {
+                    yield return new ValidationResult("电子邮箱不和规范，请输入正确的邮箱");
+                }
+            }
+        }
+    }
+}

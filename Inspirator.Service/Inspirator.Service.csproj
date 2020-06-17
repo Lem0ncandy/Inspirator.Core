@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Inspirator.Common\Inspirator.Common.csproj" />
     <ProjectReference Include="..\Inspirator.IRepository\Inspirator.IRepository.csproj" />
     <ProjectReference Include="..\Inspirator.IService\Inspirator.IService.csproj" />
     <ProjectReference Include="..\Inspirator.Model\Inspirator.Model.csproj" />
