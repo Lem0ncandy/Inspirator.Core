@@ -1,11 +1,14 @@
 ﻿using Inspirator.Model.DTO.Enum;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Inspirator.Model.Entities
 {
     public class Option :BaseEntity 
     {
-        public int MyProperty { get; set; }
+        [Required]
+        public string Summary { get; set; }
+        [Required]
         public int Index { get; set; }
         public OptionIndexType Type { get; set; } = OptionIndexType.Number;
 
