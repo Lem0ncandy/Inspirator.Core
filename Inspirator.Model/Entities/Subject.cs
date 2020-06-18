@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Inspirator.Model.Entities
 {
-    public class Question : BaseEntity
+    public class Subject : BaseEntity
     {
         [Required]
         public string Title { get; set; }
@@ -15,7 +15,7 @@ namespace Inspirator.Model.Entities
         public Survey Survey { get; set; }
         public ICollection<Option> Options { get; set; }
 
-        public Question(string title, int index)
+        public Subject(string title, int index)
         {
             Title = title;
             Index = index;

@@ -4,14 +4,16 @@ using Inspirator.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Inspirator.Model.Migrations
 {
     [DbContext(typeof(MainContext))]
-    partial class MainContextModelSnapshot : ModelSnapshot
+    [Migration("20200618142611_quesion change name to subject ")]
+    partial class quesionchangenametosubject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +39,7 @@ namespace Inspirator.Model.Migrations
                     b.Property<DateTime?>("ModifyTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("SubjectId")
+                    b.Property<Guid>("QuestionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Summary")
@@ -49,7 +51,7 @@ namespace Inspirator.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Options");
                 });
@@ -83,7 +85,7 @@ namespace Inspirator.Model.Migrations
 
                     b.HasIndex("SurveyId");
 
-                    b.ToTable("Subject");
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Inspirator.Model.Entities.Survey", b =>
@@ -194,9 +196,9 @@ namespace Inspirator.Model.Migrations
 
             modelBuilder.Entity("Inspirator.Model.Entities.Option", b =>
                 {
-                    b.HasOne("Inspirator.Model.Entities.Subject", "Subject")
+                    b.HasOne("Inspirator.Model.Entities.Subject", "Question")
                         .WithMany("Options")
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

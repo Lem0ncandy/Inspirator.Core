@@ -12,8 +12,8 @@ namespace Inspirator.Model.Entities
         public int Index { get; set; }
         public OptionIndexType Type { get; set; } = OptionIndexType.Number;
 
-        public Guid QuestionId { get; set; }
-        public Question Question { get; set; }
+        public Guid SubjectId { get; set; }
+        public Subject Subject { get; set; }
 
         public Option(string summary, int index)
         {

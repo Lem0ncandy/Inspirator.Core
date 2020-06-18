@@ -7,9 +7,12 @@ namespace Inspirator.Model.DTO
 {
     public class CreateSurveyDTO
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Title { get; set; }
         public string Summary { get; set; }
-        public ICollection<Question> Questions { get; set; }
+        public ICollection<Subject> Questions { get; set; }
         public ICollection<Option> Options { get; set; }
     }
 }

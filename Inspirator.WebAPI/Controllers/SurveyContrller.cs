@@ -41,7 +41,7 @@ namespace Inspirator.WebAPI.Controllers
         [HttpPost]
         public async Task<UnifyResponseDto> Post(CreateSurveyDTO model)
         {
-            await _service.CreateSureveyAsync(model.Survey, model.Questions, model.Options);
+            //await _service.CreateSureveyAsync(model.Survey, model.Questions, model.Options);
             if (await _unitOfWork.CommitAsync())
             {
                 return UnifyResponseDto.Sucess();

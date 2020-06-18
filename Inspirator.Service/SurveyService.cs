@@ -24,12 +24,12 @@ namespace Inspirator.Service
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task CreateSureveyAsync(Survey survey,ICollection<Question> questions, ICollection<Option> options)
+        public async Task CreateSureveyAsync(Survey survey,ICollection<Subject> questions, ICollection<Option> options)
         {
-            survey.Questions = new Collection<Question>();
+            survey.Questions = new Collection<Subject>();
             foreach (var question in questions)
             {
-                question.Options = new Collection<Option>(options.Where( x=> x.QuestionIndex == question.Index).ToList());
+                //question.Options = new Collection<Option>(options.Where( x=> x.QuestionIndex == question.Index).ToList());
             }
             survey.Questions = questions;
             await _repository.InsertAsync(survey);

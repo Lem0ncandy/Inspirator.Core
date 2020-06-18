@@ -11,7 +11,7 @@ namespace Inspirator.Model.Entities
         public string Summary { get; set; }
         public int StarCount { get; set; }
         public int ViewCount { get; set; }
-        public ICollection<Question> Questions { get; set; }
+        public ICollection<Subject> Questions { get; set; }
         public Survey(string title, string summary)
         {
             Title = title;
