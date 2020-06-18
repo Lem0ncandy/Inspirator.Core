@@ -13,7 +13,7 @@ namespace Inspirator.Model.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserIdentity>().HasOne(x => x.User).WithMany(x => x.UserIdentitys).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Subject>().HasOne(x => x.Survey).WithMany(x => x.Subject).HasForeignKey(x => x.SurveyId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Subject>().HasOne(x => x.Survey).WithMany(x => x.Subjects).HasForeignKey(x => x.SurveyId).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Option>().HasOne(x => x.Subject).WithMany(x => x.Options).HasForeignKey(x => x.SubjectId).OnDelete(DeleteBehavior.Restrict);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

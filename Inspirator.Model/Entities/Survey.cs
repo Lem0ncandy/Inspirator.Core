@@ -10,15 +10,21 @@ namespace Inspirator.Model.Entities
         public string Title { get; set; }
         [Required]
         public string Summary { get; set; }
-        public int StarCount { get; set; }
-        public int ViewCount { get; set; }
+        public int StarCount { get; set; } = 0;
+        public int ViewCount { get; set; } = 0;
         public OptionIndexType Type { get; set; } = OptionIndexType.Number;
 
-        public ICollection<Subject> Subject { get; set; }
+        public IList<Subject> Subjects { get; set; }
         public Survey(string title, string summary)
         {
             Title = title;
             Summary = summary;
+        }
+        public Survey(string title, string summary, OptionIndexType type)
+        {
+            Title = title;
+            Summary = summary;
+            Type = type;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Inspirator.WebAPI.Controllers
 
         // GET: api/<TestController>
         [HttpGet]
-        public async Task Get()
+        public void Get()
         {
         }
 

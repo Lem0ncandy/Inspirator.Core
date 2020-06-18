@@ -16,23 +16,21 @@ namespace Inspirator.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SurveyContrller : ControllerBase
+    public class SurveyController : ControllerBase
     {
         private readonly ISurveyService _service;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SurveyContrller(ISurveyService service, IMapper mapper, IUnitOfWork unitOfWork)
+        public SurveyController(ISurveyService service, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-
-
         [HttpGet]
-        public async Task Get()
+        public void Get()
         {
 
         }
@@ -41,10 +39,10 @@ namespace Inspirator.WebAPI.Controllers
         [HttpPost]
         public async Task<UnifyResponseDto> Post(CreateSurveyDTO model)
         {
-            //await _service.CreateSureveyAsync(model.Survey, model.Questions, model.Options);
+            await _service.CreateSureveyAsync(model);
             if (await _unitOfWork.CommitAsync())
             {
-                return UnifyResponseDto.Sucess();
+                return UnifyResponseDto.Sucess("添加成功");
             }
             return UnifyResponseDto.Fail();
         }

@@ -30,6 +30,6 @@ namespace Inspirator.Model.Entities
         /// 头像路径
         /// </summary>
         public string Avatar { get; set; }
-        public virtual ICollection<UserIdentity> UserIdentitys { get; set; }
+        public virtual IList<UserIdentity> UserIdentitys { get; set; }
     }
 }

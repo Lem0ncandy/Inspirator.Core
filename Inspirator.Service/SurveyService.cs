@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using Inspirator.IRepository;
 using Inspirator.IService;
+using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Inspirator.Service
@@ -24,14 +23,15 @@ namespace Inspirator.Service
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task CreateSureveyAsync(Survey survey,ICollection<Subject> subjects, ICollection<Option> options)
+        public async Task CreateSureveyAsync(CreateSurveyDTO surveyDTO)
         {
-            survey.Subject = new Collection<Subject>();
+            Survey survey = _mapper.Map<Survey>(surveyDTO);
+            IList<Subject> subjects = _mapper.Map<List<Subject>>(surveyDTO.SubjectDTOs);
+            survey.Subjects = subjects;
             foreach (var subject in subjects)
             {
-                //question.Options = new Collection<Option>(options.Where( x=> x.QuestionIndex == question.Index).ToList());
+                subject.Options = _mapper.Map<List<Option>>(surveyDTO.OptionDTOs.Where(x => x.SubjectIndex == subject.Index).ToList());
             }
-            survey.Subject = subjects;
             await _repository.InsertAsync(survey);
         }
 
