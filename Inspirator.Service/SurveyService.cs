@@ -5,6 +5,7 @@ using Inspirator.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,9 +29,9 @@ namespace Inspirator.Service
             survey.Questions = new Collection<Question>();
             foreach (var question in questions)
             {
-                question.Options = new Collection<Option>();
+                question.Options = new Collection<Option>(options.Where( x=> x.QuestionIndex == question.Index).ToList());
             }
-            //survey.Questions.Add(question);
+            survey.Questions = questions;
             await _repository.InsertAsync(survey);
         }
 

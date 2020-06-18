@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Inspirator.IRepository;
 using Inspirator.IService;
+using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,17 +34,19 @@ namespace Inspirator.WebAPI.Controllers
         [HttpGet]
         public async Task Get()
         {
-            //var surevey = new Survey("Test", "summary");
-            //Question question = new Question("qutitle", 1);
-            //Option option = new Option("option", 1);
-            //await _service.CreateSureveyAsync(surevey,question,option);
-            //await _unitOfWork.CommitAsync();
+
         }
 
         // POST api/<SurveyContrller>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<UnifyResponseDto> Post(CreateSurveyDTO model)
         {
+            await _service.CreateSureveyAsync(model.Survey, model.Questions, model.Options);
+            if (await _unitOfWork.CommitAsync())
+            {
+                return UnifyResponseDto.Sucess();
+            }
+            return UnifyResponseDto.Fail();
         }
 
         // PUT api/<SurveyContrller>/5
