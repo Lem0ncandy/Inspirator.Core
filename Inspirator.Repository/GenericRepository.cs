@@ -35,9 +35,24 @@ namespace Inspirator.Repository
             await _context.Set<TEntity>().AddRangeAsync(entities);
         }
 
+        public IQueryable<TEntity> Find()
+        {
+            return _context.Set<TEntity>().Where(x => x.IsRemove == false);
+        }
+
         public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
         {
             return _context.Set<TEntity>().Where(x => x.IsRemove == false).Where(expression);
+        }
+
+        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> expression, int page, int size)
+        {
+            return _context.Set<TEntity>().Where(x => x.IsRemove == false).Skip(page * size).Take(size);
+        }
+
+        public IQueryable<TEntity> Find(int page, int size)
+        {
+            return _context.Set<TEntity>().Where(x => x.IsRemove == false).Skip(page * size).Take(size);
         }
 
         public async Task<TEntity> FindAsync(TEntity Entity)
@@ -60,7 +75,6 @@ namespace Inspirator.Repository
         {
             throw new NotImplementedException();
         }
-
 
     }
 }

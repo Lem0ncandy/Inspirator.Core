@@ -3,6 +3,7 @@ using Inspirator.IRepository;
 using Inspirator.IService;
 using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,14 +36,19 @@ namespace Inspirator.Service
             await _repository.InsertAsync(survey);
         }
 
+        public async Task<int> GetCount()
+        {
+            return await _repository.Find().CountAsync();
+        }
+
         public Task GetSureveyAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Survey>> GetSureveyPagenationAsync(Guid id)
+        public async Task<IEnumerable<Survey>> GetSureveyPaginationAsync(int page,int size)
         {
-            throw new NotImplementedException();
+            return await _repository.Find(page, size).ToListAsync();
         }
     }
 }

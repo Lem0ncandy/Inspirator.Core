@@ -10,6 +10,7 @@ namespace Inspirator.IService
     {
         Task CreateSureveyAsync(CreateSurveyDTO surveyDTO);
         Task GetSureveyAsync(Guid id);
-        Task<IEnumerable<Survey>> GetSureveyPagenationAsync(Guid id);
+        Task<IEnumerable<Survey>> GetSureveyPaginationAsync(int page,int size);
+        Task<int> GetCount();
     }
 }
