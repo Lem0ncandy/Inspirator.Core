@@ -14,5 +14,11 @@ namespace Inspirator.Model.Entities
         public Guid SurveyId { get; set; }
         public Survey Survey { get; set; }
         public ICollection<Option> Options { get; set; }
+
+        public Question(string title, int index)
+        {
+            Title = title;
+            Index = index;
+        }
     }
 }

@@ -4,6 +4,7 @@ using Inspirator.IService;
 using Inspirator.Model.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,10 +23,15 @@ namespace Inspirator.Service
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public Task CreateSureveyAsync(Survey survey, Question question, Option option)
+        public async Task CreateSureveyAsync(Survey survey,ICollection<Question> questions, ICollection<Option> options)
         {
-            throw new NotImplementedException();
-
+            survey.Questions = new Collection<Question>();
+            foreach (var question in questions)
+            {
+                question.Options = new Collection<Option>();
+            }
+            //survey.Questions.Add(question);
+            await _repository.InsertAsync(survey);
         }
 
         public Task GetSureveyAsync(Guid id)

@@ -8,7 +8,7 @@ namespace Inspirator.IService
 {
     public interface ISurveyService
     {
-        Task CreateSureveyAsync(Survey survey, Question question, Option option);
+        Task CreateSureveyAsync(Survey survey, ICollection<Question> questions, ICollection<Option> options);
         Task GetSureveyAsync(Guid id);
         Task<IEnumerable<Survey>> GetSureveyPagenationAsync(Guid id);
     }
