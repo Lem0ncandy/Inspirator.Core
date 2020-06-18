@@ -12,7 +12,7 @@ namespace Inspirator.Model.DTO
         /// </summary>
         public string Title { get; set; }
         public string Summary { get; set; }
-        public ICollection<Subject> Questions { get; set; }
+        public ICollection<Subject> Subjects { get; set; }
         public ICollection<Option> Options { get; set; }
     }
 }

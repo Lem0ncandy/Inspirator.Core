@@ -204,7 +204,7 @@ namespace Inspirator.Model.Migrations
             modelBuilder.Entity("Inspirator.Model.Entities.Subject", b =>
                 {
                     b.HasOne("Inspirator.Model.Entities.Survey", "Survey")
-                        .WithMany("Questions")
+                        .WithMany("Subject")
                         .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
