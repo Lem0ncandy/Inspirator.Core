@@ -39,6 +39,7 @@ namespace Inspirator.WebAPI
                 {
                     setup.SerializerSettings.ContractResolver =
                         new CamelCasePropertyNamesContractResolver();
+                    setup.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 })
                 .AddXmlDataContractSerializerFormatters()
                 .ConfigureApiBehaviorOptions(setup =>

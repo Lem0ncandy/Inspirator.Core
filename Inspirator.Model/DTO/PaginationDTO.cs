@@ -14,5 +14,9 @@ namespace Inspirator.Model.DTO
             Count = count;
             Data = data ?? throw new ArgumentNullException(nameof(data));
         }
+        public PaginationDTO()
+        {
+
+        }
     }
 }

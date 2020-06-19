@@ -41,14 +41,14 @@ namespace Inspirator.Service
             return await _repository.Find().CountAsync();
         }
 
-        public Task GetSureveyAsync(Guid id)
+        public async Task<Survey> GetSureveyFullAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _repository.Find().Where(x => x.Id == id).Include(x => x.Subjects).ThenInclude(x => x.Options).AsNoTracking().SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Survey>> GetSureveyPaginationAsync(int page,int size)
+        public async Task<IEnumerable<Survey>> GetSureveyPaginationAsync(int page, int size)
         {
-            return await _repository.Find(page, size).ToListAsync();
+            return await _repository.Find(page, size).AsNoTracking().ToListAsync();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Inspirator.IService
     public interface ISurveyService
     {
         Task CreateSureveyAsync(CreateSurveyDTO surveyDTO);
-        Task GetSureveyAsync(Guid id);
+        Task<Survey> GetSureveyFullAsync(Guid id);
         Task<IEnumerable<Survey>> GetSureveyPaginationAsync(int page,int size);
         Task<int> GetCount();
     }

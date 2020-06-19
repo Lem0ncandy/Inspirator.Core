@@ -35,6 +35,16 @@ namespace Inspirator.WebAPI.Controllers
             var surveyList = await _service.GetSureveyPaginationAsync(model.Page - 1, model.Size);
             return new PaginationDTO<IEnumerable<Survey>>(await _service.GetCount(), surveyList);
         }
+        [HttpGet("{id}")]
+        public async Task<Survey> Get([FromRoute] string id)
+        {
+            if (Guid.TryParse(id, out Guid surveyID))
+            {
+                var reuslt  = await _service.GetSureveyFullAsync(surveyID);
+                return reuslt;
+            }
+            return null;
+        }
 
         // POST api/<SurveyContrller>
         [HttpPost]
