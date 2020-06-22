@@ -21,7 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4D3C8DEF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inspirator.UnitTest1", "Inspirator.UnitTest1\Inspirator.UnitTest1.csproj", "{F81868AD-FBE8-4C4A-A002-3DCFC4D998BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inspirator.Common", "Inspirator.Common\Inspirator.Common.csproj", "{C0E5247F-FC79-4CE2-822E-62D2B86CE1CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inspirator.Common", "Inspirator.Common\Inspirator.Common.csproj", "{C0E5247F-FC79-4CE2-822E-62D2B86CE1CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inspirator.IdentityServer4", "Inspirator.IdentityServer4\Inspirator.IdentityServer4.csproj", "{BEAC3475-D5A7-4AF2-B791-E5804C198664}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{C0E5247F-FC79-4CE2-822E-62D2B86CE1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0E5247F-FC79-4CE2-822E-62D2B86CE1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0E5247F-FC79-4CE2-822E-62D2B86CE1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEAC3475-D5A7-4AF2-B791-E5804C198664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEAC3475-D5A7-4AF2-B791-E5804C198664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEAC3475-D5A7-4AF2-B791-E5804C198664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEAC3475-D5A7-4AF2-B791-E5804C198664}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{AC0A48F8-AC04-4995-9B1D-DCBDCE57CCED} = {3E35B395-5881-45CD-BAFE-E887A1C8307B}
 		{F81868AD-FBE8-4C4A-A002-3DCFC4D998BE} = {4D3C8DEF-45EB-4B85-8336-B6C1954E6E2B}
 		{C0E5247F-FC79-4CE2-822E-62D2B86CE1CC} = {3E35B395-5881-45CD-BAFE-E887A1C8307B}
+		{BEAC3475-D5A7-4AF2-B791-E5804C198664} = {3E35B395-5881-45CD-BAFE-E887A1C8307B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9F90CB53-108D-4CBF-9097-FBAC2EDF6904}

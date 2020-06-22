@@ -43,7 +43,13 @@ namespace Inspirator.Service
 
         public async Task<Survey> GetSureveyFullAsync(Guid id)
         {
-            return await _repository.Find().Where(x => x.Id == id).Include(x => x.Subjects).ThenInclude(x => x.Options).AsNoTracking().SingleOrDefaultAsync();
+            var survey = await _repository.Find().Where(x => x.Id == id).Include(x => x.Subjects).ThenInclude(x => x.Options).AsNoTracking().SingleOrDefaultAsync();
+            survey.Subjects = survey.Subjects.OrderBy(x => x.Index).ToList();
+            foreach (var subject in survey.Subjects)
+            {
+                subject.Options = subject.Options.OrderBy(x => x.Index).ToList();
+            }
+            return survey;
         }
 
         public async Task<IEnumerable<Survey>> GetSureveyPaginationAsync(int page, int size)
