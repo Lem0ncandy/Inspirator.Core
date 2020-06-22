@@ -1,6 +1,5 @@
 ﻿using Inspirator.Model.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Inspirator.Model.Context
 {

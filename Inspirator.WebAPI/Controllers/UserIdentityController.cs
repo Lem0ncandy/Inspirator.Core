@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Reflection.Metadata;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +8,7 @@ using Inspirator.IService;
 using Inspirator.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,12 +22,14 @@ namespace Inspirator.WebAPI.Controllers
         private readonly IConfiguration _configuration;
         private readonly IUserIdentityService _service;
         private readonly IUserService _userSvc;
+        private readonly ILogger _logger;
 
-        public UserIdentityController(IConfiguration configuration, IUserIdentityService service, IUserService userSvc)
+        public UserIdentityController(IConfiguration configuration, IUserIdentityService service, IUserService userSvc, ILogger logger)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _service = service ?? throw new ArgumentNullException(nameof(service));
             _userSvc = userSvc ?? throw new ArgumentNullException(nameof(userSvc));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         // GET: api/<UserIdentityController>

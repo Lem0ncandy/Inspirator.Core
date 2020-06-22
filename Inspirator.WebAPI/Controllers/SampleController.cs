@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
+using Inspirator.IRepository;
+using Inspirator.IService;
+using Inspirator.Model.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace Inspirator.WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SampleController : ControllerBase
+    {
+        private readonly ISampleService _service;
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger _logger;
+
+        public SampleController(ISampleService service, IMapper mapper, IUnitOfWork unitOfWork, ILogger logger)
+        {
+            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
+        // GET: api/<SampleController>
+        [HttpGet("{id}")]
+        public async Task<IEnumerable<Sample>> Get([FromRoute] string id)
+        {
+            Guid.TryParse(id, out Guid userId);
+            return await _service.GetamplesByUserIdAsync(userId);
+
+        }
+
+
+        // POST api/<SampleController>
+        [HttpPost]
+        public void Post()
+        {
+        }
+
+    }
+}

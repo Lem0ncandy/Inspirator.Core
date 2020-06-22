@@ -1,5 +1,4 @@
-﻿using Inspirator.Model.DTO.Enum;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Inspirator.Model.Entities

@@ -27,7 +27,7 @@ namespace Inspirator.Model.Entities
             Summary = summary;
             Type = type;
         }
-        public Survey()
+        private Survey()
         {
 
         }

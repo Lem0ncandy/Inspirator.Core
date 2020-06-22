@@ -11,5 +11,16 @@ namespace Inspirator.Model.Entities
         public Survey Survey { get; set; }
         public int Score { get; set; }
         public virtual IList<SampleOption> SampleOptions { get; set; }
+        private Sample()
+        {
+
+        }
+
+        public Sample(Guid userId, Guid surveyId, int score)
+        {
+            UserId = userId;
+            SurveyId = surveyId;
+            Score = score;
+        }
     }
 }

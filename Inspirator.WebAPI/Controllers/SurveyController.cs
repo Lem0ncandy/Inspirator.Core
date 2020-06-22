@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Inspirator.IRepository;
@@ -9,6 +7,7 @@ using Inspirator.IService;
 using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,12 +20,14 @@ namespace Inspirator.WebAPI.Controllers
         private readonly ISurveyService _service;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger _logger;
 
-        public SurveyController(ISurveyService service, IMapper mapper, IUnitOfWork unitOfWork)
+        public SurveyController(ISurveyService service, IMapper mapper, IUnitOfWork unitOfWork, ILogger logger)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [HttpGet]

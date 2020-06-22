@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Inspirator.IService;
 using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,11 +18,13 @@ namespace Inspirator.WebAPI.Controllers
     {
         private readonly IUserService _service;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
-        public UserController(IUserService service, IMapper mapper)
+        public UserController(IUserService service, IMapper mapper, ILogger logger)
         {
             _service = service ?? throw new ArgumentNullException();
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
 
