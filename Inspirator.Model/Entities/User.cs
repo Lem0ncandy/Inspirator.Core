@@ -31,5 +31,6 @@ namespace Inspirator.Model.Entities
         /// </summary>
         public string Avatar { get; set; }
         public virtual IList<UserIdentity> UserIdentitys { get; set; }
+        public virtual IList<Sample> Samples { get;set ;}
     }
 }

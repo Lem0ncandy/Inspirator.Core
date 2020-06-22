@@ -15,6 +15,7 @@ namespace Inspirator.Model.Entities
         public OptionIndexType Type { get; set; } = OptionIndexType.Number;
 
         public IList<Subject> Subjects { get; set; }
+        public IList<Sample> Sample { get; set; }
         public Survey(string title, string summary)
         {
             Title = title;
