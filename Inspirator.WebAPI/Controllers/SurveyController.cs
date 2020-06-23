@@ -19,14 +19,12 @@ namespace Inspirator.WebAPI.Controllers
     {
         private readonly ISurveyService _service;
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<SurveyController> _logger;
 
-        public SurveyController(ISurveyService service, IMapper mapper, IUnitOfWork unitOfWork, ILogger<SurveyController> logger)
+        public SurveyController(ISurveyService service, IMapper mapper, ILogger<SurveyController> logger)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 

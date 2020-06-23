@@ -27,6 +27,6 @@ namespace Inspirator.Model.Context
         public DbSet<Subject> Subject { get; set; }
         public DbSet<Option> Options { get; set; }
         public DbSet<Sample> Samples { get; set; }
-        public DbSet<SampleOption> UserSurveyOptions { get; set; }
+        public DbSet<SampleOption> SampleOptions { get; set; }
     }
 }
