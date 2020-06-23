@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Inspirator.IRepository;
 using Inspirator.IService;
 using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;

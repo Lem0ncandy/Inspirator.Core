@@ -4,9 +4,9 @@ using Inspirator.Model.Entities;
 
 namespace Inspirator.Repository
 {
-    public class SurveyRepository : GenericRepository<Survey>, ISurveyRepository
+    public class OptionRepository : GenericRepository<Option>, IOptionRepository
     {
-        public SurveyRepository(MainContext context) : base(context)
+        public OptionRepository(MainContext context) : base(context)
         {
         }
     }
