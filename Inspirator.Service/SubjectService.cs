@@ -5,13 +5,13 @@ using System;
 
 namespace Inspirator.Service
 {
-    public class OptionService : IOptionService
+    public class SubjectService : ISubjectService
     {
-        private readonly IOptionRepository _repository;
+        private readonly ISubjectRepository _repository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public OptionService(IOptionRepository repository, IMapper mapper,IUnitOfWork unitOfWork)
+        public SubjectService(ISubjectRepository repository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
