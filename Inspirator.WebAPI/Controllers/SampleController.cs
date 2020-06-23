@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Inspirator.IRepository;
 using Inspirator.IService;
+using Inspirator.Model.DTO;
 using Inspirator.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -41,9 +44,19 @@ namespace Inspirator.WebAPI.Controllers
 
         // POST api/<SampleController>
         [HttpPost]
-        public void Post()
+        public void Post(SubmitSampleDTO model)
         {
+            _service.CreateSample(Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value),model.Id, Sorce(model.Options));
         }
 
+        private int Sorce(IList<int> options)
+        {
+            int s = 0;
+            for (int i = 0; i < options.Count; i++)
+            {
+                s++;
+            }
+            return s;
+        }
     }
 }
