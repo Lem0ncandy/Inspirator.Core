@@ -41,7 +41,7 @@ namespace Inspirator.WebAPI.Controllers
         {
             if (Guid.TryParse(id, out Guid surveyID))
             {
-                var reuslt  = await _service.GetSureveyFullAsync(surveyID);
+                var reuslt = await _service.GetSureveyFullAsync(surveyID);
                 return reuslt;
             }
             return null;
@@ -51,8 +51,7 @@ namespace Inspirator.WebAPI.Controllers
         [HttpPost]
         public async Task<UnifyResponseDto> Post(CreateSurveyDTO model)
         {
-            await _service.CreateSureveyAsync(model);
-            if (await _unitOfWork.CommitAsync())
+            if (await _service.CreateSureveyAsync(model))
             {
                 return UnifyResponseDto.Sucess("添加成功");
             }

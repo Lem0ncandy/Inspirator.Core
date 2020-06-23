@@ -24,7 +24,7 @@ namespace Inspirator.Service
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task CreateSureveyAsync(CreateSurveyDTO surveyDTO)
+        public async Task<bool> CreateSureveyAsync(CreateSurveyDTO surveyDTO)
         {
             Survey survey = _mapper.Map<Survey>(surveyDTO);
             IList<Subject> subjects = _mapper.Map<List<Subject>>(surveyDTO.SubjectDTOs);
@@ -34,6 +34,7 @@ namespace Inspirator.Service
                 subject.Options = _mapper.Map<List<Option>>(surveyDTO.OptionDTOs.Where(x => x.SubjectIndex == subject.Index).ToList());
             }
             await _repository.InsertAsync(survey);
+            return await _unitOfWork.CommitAsync();
         }
 
         public async Task<int> GetCount()
