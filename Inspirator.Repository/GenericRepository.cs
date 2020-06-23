@@ -75,6 +75,5 @@ namespace Inspirator.Repository
         {
             throw new NotImplementedException();
         }
-
     }
 }

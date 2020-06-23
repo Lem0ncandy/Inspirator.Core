@@ -21,5 +21,6 @@ namespace Inspirator.IRepository
         Task UpdateAsync(TEntity entity);
         Task RemoveAsync(TEntity entity);
         Task DeleteAsync(TEntity entity);
+        //IQueryable<TEntity> InnerJoin(TEntity inner, TEntity outer);
     }
 }
