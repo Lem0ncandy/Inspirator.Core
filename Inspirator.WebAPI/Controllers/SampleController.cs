@@ -22,9 +22,9 @@ namespace Inspirator.WebAPI.Controllers
         private readonly ISampleService _service;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger _logger;
+        private readonly ILogger<Sample> _logger;
 
-        public SampleController(ISampleService service, IMapper mapper, IUnitOfWork unitOfWork, ILogger logger)
+        public SampleController(ISampleService service, IMapper mapper, IUnitOfWork unitOfWork, ILogger<Sample> logger)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

@@ -18,9 +18,9 @@ namespace Inspirator.WebAPI.Controllers
     {
         private readonly IUserService _service;
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserService service, IMapper mapper, ILogger logger)
+        public UserController(IUserService service, IMapper mapper, ILogger<UserController> logger)
         {
             _service = service ?? throw new ArgumentNullException();
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

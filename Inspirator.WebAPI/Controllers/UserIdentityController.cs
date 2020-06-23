@@ -22,9 +22,9 @@ namespace Inspirator.WebAPI.Controllers
         private readonly IConfiguration _configuration;
         private readonly IUserIdentityService _service;
         private readonly IUserService _userSvc;
-        private readonly ILogger _logger;
+        private readonly ILogger<UserIdentityController> _logger;
 
-        public UserIdentityController(IConfiguration configuration, IUserIdentityService service, IUserService userSvc, ILogger logger)
+        public UserIdentityController(IConfiguration configuration, IUserIdentityService service, IUserService userSvc, ILogger<UserIdentityController> logger)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
             _service = service ?? throw new ArgumentNullException(nameof(service));
